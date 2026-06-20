@@ -1,0 +1,1 @@
+sass --watch --style=compressed ".\schedules.scss" "schedules.min.css"

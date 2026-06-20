@@ -1,0 +1,17 @@
+{
+  "name": "events",
+  "version": "1.0.0",
+  "description": "Events",
+  "main": "./events.js",
+  "scripts": {
+    "mobile": "webpack --entry ./schedules/mobile.js --output-path . --output-filename mobile-schedule.min.js --progress --mode=production --devtool source-map",
+    "desktop": "webpack --entry ./schedules/desktop.js --output-path . --output-filename desktop-schedule.min.js --progress --mode=production --devtool source-map",
+    "all": "run-p  mobile desktop "
+  },
+  "author": "Ewald Harmsen",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^5.107.2",
+    "webpack-cli": "^4.10.0"
+  }
+}
