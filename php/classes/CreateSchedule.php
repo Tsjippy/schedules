@@ -40,16 +40,16 @@ class CreateSchedule extends Schedules
     {
         global $wpdb;
 
-        $wpdb->insert(
+        $eventId    = TSJIPPY\insertInDb(
             $this->events->tableName,
-            $event
+            $event,
+            [],
+            'schedules'
         );
 
-        if (!empty($wpdb->last_error)) {
-            return new WP_Error('schedules', $wpdb->last_error);
+        if (is_wp_error($eventId)) {
+            return $eventId;
         }
-
-        $eventId   = $wpdb->insert_id;
 
         // Create event warning
         if (isset($settings['reminders'])) {
@@ -166,23 +166,32 @@ class CreateSchedule extends Schedules
         extract($events, EXTR_OVERWRITE);
 
         // store the event and post ids in db
-        global $wpdb;
-
-        $wpdb->insert(
+        $sessionId  = TSJIPPY\insertInDb(
             $this->sessionTableName,
             [
-                'schedule_id'    => $this->scheduleId,
-                'post_ids'       => serialize($postIds),
-                'event_ids'      => serialize($eventIds),
-                'meal'           => $title == 'lunch' || $title == 'dinner'
-            ]
+                'schedule_id' => $this->scheduleId,
+                'post_ids'    => serialize($postIds),
+                'event_ids'   => serialize($eventIds),
+                'meal'        => $title == 'lunch' || $title == 'dinner'
+            ],
+            [
+                '%d',
+                '%s',
+                '%s',
+                '%d'
+            ],
+            'schedules'
         );
+
+        if(is_wp_error($sessionId)){
+            return $sessionId;
+        }
 
         // add to schedule
         if (!isset($this->currentSchedule->sessions[$this->date])) {
             $this->currentSchedule->sessions[$this->date]    = [];
         }
-        $this->currentSchedule->sessions[$this->date][$this->startTime]    = $this->getSessionEvent($wpdb->insert_id);
+        $this->currentSchedule->sessions[$this->date][$this->startTime]    = $this->getSessionEvent($sessionId);
     }
 
     /**
@@ -334,6 +343,15 @@ class CreateSchedule extends Schedules
                     'id'        => $event->id
                 ),
             );
+
+            /**
+             * Flush db cache
+             */
+            if(wp_cache_supports( 'flush_group' )){
+                wp_cache_flush_group('schedules');
+            }else{
+                wp_cache_flush();
+            }
         }
 
         // update the schedule
@@ -418,6 +436,15 @@ class CreateSchedule extends Schedules
                 'id'        => $this->currentSession->id
             ],
         );
+
+         /**
+         * Flush db cache
+         */
+        if(wp_cache_supports( 'flush_group' )){
+            wp_cache_flush_group('schedules');
+        }else{
+            wp_cache_flush();
+        }
     }
 
     /**
@@ -518,15 +545,27 @@ class CreateSchedule extends Schedules
                 $arg,
                 array('id' => $settings['schedule-id'])
             );
+
+            /**
+             * Flush db cache
+             */
+            if(wp_cache_supports( 'flush_group' )){
+                wp_cache_flush_group('schedules');
+            }else{
+                wp_cache_flush();
+            }
+
             $action    = 'updated';
         } else {
-            $wpdb->insert(
+            $result = TSJIPPY\insertInDb(
                 $this->tableName,
-                $arg
+                $arg,
+                [],
+                'schedules'
             );
 
-            if ($wpdb->last_error !== '') {
-                return new WP_Error('schedules', $wpdb->last_error);
+            if (is_wp_error($result)){
+                return $result;
             }
 
             $action    = 'added';
@@ -562,6 +601,15 @@ class CreateSchedule extends Schedules
                 'id'        => $scheduleId
             )
         );
+
+         /**
+         * Flush db cache
+         */
+        if(wp_cache_supports( 'flush_group' )){
+            wp_cache_flush_group('schedules');
+        }else{
+            wp_cache_flush();
+        }
 
         return 'Succesfully published the schedule';
     }
@@ -604,10 +652,11 @@ class CreateSchedule extends Schedules
         }
 
         //Delete the schedule
-        $wpdb->delete(
+        TSJIPPY\removeFromDb(
             $this->tableName,
             ['id' => $scheduleId],
             ['%d'],
+            'schedules'
         );
 
         //Remove the schedule from the schedules array
@@ -637,10 +686,11 @@ class CreateSchedule extends Schedules
         }
 
         // Delete the session
-        $wpdb->delete(
+        TSJIPPY\removeFromDb(
             $this->sessionTableName,
             ['id' => $session->id],
             ['%d'],
+            'schedules'
         );
     }
 
