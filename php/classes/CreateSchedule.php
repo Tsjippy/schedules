@@ -336,12 +336,15 @@ class CreateSchedule extends Schedules
             }
 
             //Update the database
-            $wpdb->update(
+            $result = TSJIPPY\updateDbValue(
                 $this->events->tableName,
                 $args,
                 array(
                     'id'        => $event->id
                 ),
+                [],
+                ['%d'],
+                'schedules'
             );
 
             /**
@@ -426,25 +429,19 @@ class CreateSchedule extends Schedules
         }
 
         // Update the session
-        $wpdb->update(
+        $result = TSJIPPY\updateDbValue(
             $this->sessionTableName,
             [
-                'post_ids'        => serialize($this->currentSession->post_ids),
-                'event_ids'        => serialize($this->currentSession->event_ids)
+                'post_ids'  => serialize($this->currentSession->post_ids),
+                'event_ids' => serialize($this->currentSession->event_ids)
             ],
             [
                 'id'        => $this->currentSession->id
             ],
+            ['%s','%s'],
+            ['%d'],
+            'schedules'
         );
-
-         /**
-         * Flush db cache
-         */
-        if(wp_cache_supports( 'flush_group' )){
-            wp_cache_flush_group('schedules');
-        }else{
-            wp_cache_flush();
-        }
     }
 
     /**
@@ -540,20 +537,14 @@ class CreateSchedule extends Schedules
         );
 
         if (!empty($settings['update'])) {
-            $wpdb->update(
+            $result = TSJIPPY\updateDbValue(
                 $this->tableName,
                 $arg,
-                array('id' => $settings['schedule-id'])
+                array('id' => $settings['schedule-id']),
+                [],
+                ['%d'],
+                'schedules'
             );
-
-            /**
-             * Flush db cache
-             */
-            if(wp_cache_supports( 'flush_group' )){
-                wp_cache_flush_group('schedules');
-            }else{
-                wp_cache_flush();
-            }
 
             $action    = 'updated';
         } else {
@@ -592,23 +583,21 @@ class CreateSchedule extends Schedules
 
         $family->updateFamilyMeta($settings['schedule-target'], 'schedule', $scheduleId);
 
-        $wpdb->update(
+        $result = TSJIPPY\updateDbValue(
             $this->tableName,
             array(
                 'published' => true
             ),
             array(
                 'id'        => $scheduleId
-            )
+            ),
+            ['%d'],
+            ['%d'],
+            'schedules'
         );
 
-         /**
-         * Flush db cache
-         */
-        if(wp_cache_supports( 'flush_group' )){
-            wp_cache_flush_group('schedules');
-        }else{
-            wp_cache_flush();
+        if (is_wp_error($result)) {
+            return $result;
         }
 
         return 'Succesfully published the schedule';
