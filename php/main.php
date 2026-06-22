@@ -18,18 +18,18 @@ function editButton($buttonHtml, $post, $content)
 
     $schedules  = new Schedules();
 
-    $result = $wpdb->get_results(
-        $wpdb->prepare(
-            "SELECT * FROM %i WHERE `post_ids` LIKE %s",
-            $schedules->sessionTableName,
-            "%" . $wpdb->esc_like($post->ID) . "%"
-        )
+    $result = TSJIPPY\getFromDb(
+        "get_schedule_by_post_id",
+        "schedules",
+        "SELECT * FROM %i WHERE `post_ids` LIKE %s",
+        $schedules->sessionTableName,
+        "%" . $wpdb->esc_like($post->ID) . "%"
     );
 
     if (!empty($result)) {;
         $url        = TSJIPPY\ADMIN\getDefaultPageLink('events', 'schedules-pages') . "?schedule={$result[0]->schedule_id}&session={$result[0]->id}";
 
-        $buttonHtml    = "<a href=$url class='button small'>Edit this schedule session</a>";
+        $buttonHtml = "<a href=$url class='button small'>Edit this schedule session</a>";
     }
 
     return $buttonHtml;

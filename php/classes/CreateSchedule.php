@@ -436,12 +436,12 @@ class CreateSchedule extends Schedules
         //check if schedule already exists
         if (
             empty($settings['update']) && 
-            $wpdb->get_var(
-                $wpdb->prepare(
-                    "SELECT * FROM %i WHERE `name` = %s",
-                    $this->tableName,
-                    $name
-                )
+            TSJIPPY\getFromDb(
+                "get_schedule_$name",
+                "schedules",
+                "SELECT * FROM %i WHERE `name` = %s LIMIT 1",
+                $this->tableName,
+                $name
             ) != null
         ) {
             return new WP_Error('schedule', "A schedule for $name already exists!");
@@ -591,13 +591,14 @@ class CreateSchedule extends Schedules
         }
 
         //Delete all the posts and events of this schedule
-        $sessions = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM %i WHERE schedule_id=%d",
-                $this->sessionTableName,
-                $scheduleId
-            )
+        $sessions = TSJIPPY\getFromDb(
+            "get_schedule_$scheduleId",
+            "schedules",
+            "SELECT * FROM %i WHERE schedule_id=%d",
+            $this->sessionTableName,
+            $scheduleId
         );
+        
         foreach ($sessions as $session) {
             $this->removeSession($session);
         }

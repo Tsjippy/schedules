@@ -118,13 +118,11 @@ class Schedules
      */
     public function getSchedules()
     {
-        global $wpdb;
-
-        $this->schedules    = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM %i WHERE 1",
-                $this->tableName
-            )
+        $this->schedules    = TSJIPPY\getFromDb(
+            "get_schedules",
+            "schedules",
+            "SELECT * FROM %i",
+            $this->tableName
         );
     }
 
@@ -562,28 +560,29 @@ class Schedules
     {
         global $wpdb;
 
-        $result->post_ids    = unserialize($result->post_ids);
-        $result->event_ids    = unserialize($result->event_ids);
+        $result->post_ids  = unserialize($result->post_ids);
+        $result->event_ids = unserialize($result->event_ids);
 
         $placeholders   = implode(', ', array_fill(0, count($result->post_ids), '%d'));
         // phpcs:disable
-        $result->posts        = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM $wpdb->posts WHERE ID IN ($placeholders)",
-                ...$result->post_ids
-            )
+        $result->posts        = TSJIPPY\getFromDb(
+            "get_all_posts_of_schedule_$result->schedule_id",
+            "schedules",
+            "SELECT * FROM %i WHERE ID IN ($placeholders)",
+            $wpdb->posts,
+            ...$result->post_ids
         );
 
         $placeholders   = implode(', ', array_fill(0, count($result->event_ids), '%d'));
         if (empty($ids)) {
             $result->events        = [];
         } else {
-            $result->events        = $wpdb->get_results(
-                $wpdb->prepare(
-                    "SELECT * FROM %i WHERE id IN ($placeholders)",
-                    $this->events->tableName,
-                    ...$result->event_ids
-                )
+            $result->events        = TSJIPPY\getFromDb(
+                "get_all_events_of_schedule_$result->schedule_id",
+                "schedules",
+                "SELECT * FROM %i WHERE ID IN ($placeholders)",
+                $this->events->tableName,
+                ...$result->event_ids
             );
         }
         // phpcs:enable
@@ -602,12 +601,12 @@ class Schedules
             return $this->currentSchedule->sessions;
         }
 
-        $results    = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM %i WHERE `schedule_id`=%d",
-                $this->sessionTableName,
-                $this->currentSchedule->id
-            )
+        $results    = TSJIPPY\getFromDb(
+            "get_sessions_of_schedule_".$this->currentSchedule->id,
+            "schedules",
+            "SELECT * FROM %i WHERE `schedule_id`=%d",
+            $this->sessionTableName,
+            $this->currentSchedule->id
         );
 
         $this->currentSchedule->sessions    = [];
@@ -672,14 +671,12 @@ class Schedules
             return $this->currentSession;
         }
 
-        global $wpdb;
-
-        $results    = $wpdb->get_results(
-            $wpdb->prepare(
-                "SELECT * FROM %i WHERE id=%d",
-                $this->sessionTableName,
-                $sessionId
-            )
+        $results    = TSJIPPY\getFromDb(
+            "get_session_$sessionId",
+            "schedules",
+            "SELECT * FROM %i WHERE id=%d",
+            $this->sessionTableName,
+            $sessionId
         );
 
         if (empty($results)) {
