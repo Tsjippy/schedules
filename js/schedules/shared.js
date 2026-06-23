@@ -264,7 +264,6 @@ export function showTimeslotModal(selected = "") {
 export async function editTimeSlot(target, date) {
   let options = {
     title: "What do you want to do?",
-    timer: 1500,
     ConfirmButtonText: "Edit timeslot",
     CustomButtonText: "Remove timeslot",
   };
@@ -336,7 +335,6 @@ function loadHostFormdata(target) {
 export async function checkConfirmation(text, target) {
   let options = {
     title: "Are you sure?",
-    timer: 1500,
     ConfirmButtonText: "Yes",
     CancelButtonText: "Cancel",
   };
