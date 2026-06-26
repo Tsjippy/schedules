@@ -4,6 +4,7 @@
 ### Added
 
 ### Changed
+- print close buttont in funtion
 
 ### Fixed
 
