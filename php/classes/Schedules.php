@@ -486,9 +486,7 @@ class Schedules
                         }
                         ?>
                     </div>
-                    <div class='diner select-wrapper <?php if ($this->currentSchedule->lunch) {
-                                                            echo 'hidden';
-                                                        } ?>'>
+                    <div class='diner select-wrapper <?php if ($this->currentSchedule->lunch) echo 'hidden'; ?>'>
                         <label>
                             Select the gmdate(s) to host <?php echo esc_attr($nameString); ?> for diner
                         </label>
@@ -529,7 +527,7 @@ class Schedules
         $date        = $this->currentSchedule->start_date;
         while (true) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-            echo $this->getMobileDay($date) . '<br>';
+ echo $this->getMobileDay($date) . '<br>';
 
             if ($date == $this->currentSchedule->end_date) {
                 break;
@@ -1046,10 +1044,10 @@ class Schedules
                         } else {
                             //mealschedule
                             if ($mealScheduleRow) {
-                                echo wp_kses_post($this->writeMealCell($date, $startTime));
+ echo wp_kses_post($this->writeMealCell($date, $startTime));
                                 //Orientation schedule
                             } else {
-                                echo wp_kses_post($this->writeOrientationCell($date, $startTime));
+ echo wp_kses_post($this->writeOrientationCell($date, $startTime));
                             }
                         }
 
@@ -1410,7 +1408,7 @@ class Schedules
                 <div class="modal-content">
                     <?php TSJIPPY\addCloseButtton();?>
                     <?php
-                    echo wp_kses_post($this->addScheduleForm(true));
+ echo wp_kses_post($this->addScheduleForm(true));
                     ?>
                 </div>
             </div>
@@ -1571,7 +1569,7 @@ class Schedules
             $action = 'Update';
         }
         TSJIPPY\addSaveButton('add_schedule', "$action schedule");
-        echo '</form>';
+ echo '</form>';
         return ob_get_clean();
     }
 }
