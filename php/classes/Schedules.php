@@ -273,7 +273,7 @@ class Schedules
         <div class='schedules-div table-wrapper' data-schedule-id="<?php echo esc_attr($this->currentSchedule->id); ?>" data-target="<?php echo esc_attr($this->currentSchedule->name); ?>" data-slotsize="<?php echo esc_attr($this->timeSlotSize); ?>" data-fixedslotsize="<?php echo esc_attr($this->fixedTimeSlotSize); ?>" data-hide_names="<?php echo esc_attr($this->hideNames); ?>" data-subject="<?php echo esc_attr($this->defaultSubject); ?>">
             <div class="modal publish-schedule hidden">
                 <div class="modal-content">
-                    <?php echo TSJIPPY\addCloseButtton();?>
+                    <?php TSJIPPY\addCloseButtton();?>
                     <form action="" method="post" id="publish-schedule_form">
                         <input type='hidden' class='no-reset' name='schedule-id'>
                         <p>
@@ -411,7 +411,7 @@ class Schedules
     ?>
         <div class="add-host-mobile-wrapper modal hidden">
             <div class="modal-content">
-                <?php echo TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton();?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id' value='<?php echo esc_attr($this->currentSchedule->id); ?>'>
 
@@ -1231,7 +1231,7 @@ class Schedules
         <!-- Add host modal for admins -->
         <div name='add-host' class="modal hidden">
             <div class="modal-content">
-                <?php echo TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton();?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id'>
                     <input type='hidden' class='no-reset' name='session-id'>
@@ -1263,7 +1263,7 @@ class Schedules
         <!-- Add recipe modal -->
         <div name='recipe-keyword-modal' class="modal hidden">
             <div class="modal-content">
-                <?php echo TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton();?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id'>
                     <input type='hidden' class='no-reset' name='date'>
@@ -1329,7 +1329,7 @@ class Schedules
         <!-- Add session modal -->
         <div name='add-session' class="modal <?php echo esc_attr($hidden); ?>">
             <div class="modal-content">
-                <?php echo TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton();?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id' value='<?php echo esc_attr($schdeuleId); ?>'>
                     <input type='hidden' class='no-reset' name='session-id' value='<?php echo esc_attr($sessionId); ?>'>
@@ -1408,7 +1408,7 @@ class Schedules
             <!-- Edit schedule modal -->
             <div id='edit-schedule_modal' class="modal hidden">
                 <div class="modal-content">
-                    <?php echo TSJIPPY\addCloseButtton();?>
+                    <?php TSJIPPY\addCloseButtton();?>
                     <?php
                     echo wp_kses_post($this->addScheduleForm(true));
                     ?>
