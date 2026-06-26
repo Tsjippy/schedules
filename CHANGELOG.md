@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- print close buttont in funtion
 
 ### Fixed
 
 ### Updated
+
+## [1.0.7] - 2026-06-26
+
+
+### Changed
+- print close buttont in funtion
 
 ## [1.0.6] - 2026-06-25
 
