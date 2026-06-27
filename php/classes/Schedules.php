@@ -1563,13 +1563,15 @@ class Schedules
                 </label>
             </div>
 
-    <?php
-        $action = 'Add';
-        if ($update) {
-            $action = 'Update';
-        }
-        TSJIPPY\addSaveButton('add_schedule', "$action schedule");
- echo '</form>';
+            <?php
+                $action = 'Add';
+                if ($update) {
+                    $action = 'Update';
+                }
+                TSJIPPY\addSaveButton('add_schedule', "$action schedule");
+                ?>
+        </form>
+        <?php
         return ob_get_clean();
     }
 }
