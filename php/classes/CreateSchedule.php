@@ -259,7 +259,6 @@ class CreateSchedule extends Schedules
      */
     protected function updateScheduleEvents($addHostPartner = true, $addPartner = true, $settings = [])
     {
-        global $wpdb;
         $family        = new TSJIPPY\FAMILY\Family();
 
         $updated    = false;

@@ -12,11 +12,11 @@ add_action('wp_after_insert_post', __NAMESPACE__ . '\afterInsertPost', 10, 2);
 function afterInsertPost($postId, $post)
 {
     if (has_shortcode($post->post_content, 'schedules')) {
-        $pages  = SETTINGS['schedule-pages'] ?? [];
+        $pages          = SETTINGS['schedule-pages'] ?? [];
 
-        $pages[]  = $postId;
+        $pages[$postId] = $postId;
 
-        $settings   = SETTINGS;
+        $settings       = SETTINGS;
         $settings['schedule-pages']  = $pages;
 
         update_option("tsjippy_events_settings", $settings);
@@ -27,9 +27,8 @@ add_action('wp_trash_post',  __NAMESPACE__ . '\trashPost');
 function trashPost($postId)
 {
     $pages  = SETTINGS['schedule-pages'] ?? [];
-    $index  = array_search($postId, $pages);
-    if ($index) {
-        unset($pages[$index]);
+    if ($pages[$postId]) {
+        unset($pages[$postId]);
         $settings   = SETTINGS;
         $settings['schedule-pages']  = $pages;
 

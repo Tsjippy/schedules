@@ -151,33 +151,33 @@ class Schedules
      */
     protected function parseScheduleVars()
     {
-        $this->timeSlotSize    = $this->currentSchedule->timeslot_size;
+        $this->timeSlotSize      = $this->currentSchedule->timeslot_size;
         if ($this->timeSlotSize    == 0) {
-            $this->timeSlotSize    = 15;
+            $this->timeSlotSize  = 15;
         }
 
-        $this->fixedTimeSlotSize    = $this->currentSchedule->fixed_timeslot_size;
+        $this->fixedTimeSlotSize = $this->currentSchedule->fixed_timeslot_size;
 
-        $this->defaultSubject        = $this->currentSchedule->subject;
+        $this->defaultSubject    = $this->currentSchedule->subject;
 
-        $this->hideNames    = $this->currentSchedule->hide_names;
+        $this->hideNames         = $this->currentSchedule->hide_names;
 
         // Parse admin rights
-        $this->admin        = false;
+        $this->admin             = false;
 
-        $this->adminRoles    = maybe_unserialize($this->currentSchedule->admin_roles);
-        $this->viewRoles    = maybe_unserialize($this->currentSchedule->view_roles);
+        $this->adminRoles        = $this->currentSchedule->admin_roles;
+        $this->viewRoles         = $this->currentSchedule->view_roles;
 
         if (empty($this->adminRoles)) {
             $this->adminRoles    = ['administrator', 'editor'];
         }
 
         if (array_intersect($this->adminRoles, $this->user->roles)) {
-            $this->admin    = true;
+            $this->admin        = true;
         }
 
         // parse view rights
-        $this->onlyMeals     = true;
+        $this->onlyMeals        = true;
 
         if (empty($this->viewRoles)) {
             $this->viewRoles    = [];
@@ -478,7 +478,7 @@ class Schedules
                         foreach ($availableLunches as $availableLunch) {
                         ?>
                             <label class='date'>
-                                <input type='checkbox' name='date[]' value='<?php echo esc_attr($availableLunch); ?>'>
+                                <input type='checkbox' name='date[<?php echo esc_attr($availableLunch); ?>]' value='<?php echo esc_attr($availableLunch); ?>'>
                                 <?php echo esc_html(gmdate('l j F', strtotime($availableLunch))); ?>
                             </label>
                             <br>
@@ -495,7 +495,7 @@ class Schedules
                         foreach ($availableDiners as $availableDiner) {
                         ?>
                             <label class='date'>
-                                <input type='checkbox' name='date[]' value='<?php echo esc_attr($availableDiner); ?>'>
+                                <input type='checkbox' name='date[<?php echo esc_attr($availableDiner); ?>]' value='<?php echo esc_attr($availableDiner); ?>'>
                                 <?php echo esc_html(gmdate('l j F', strtotime($availableDiner))); ?>
                             </label>
                             <br>
@@ -1383,12 +1383,12 @@ class Schedules
 
                     <h4>Warnings</h4>
                     <label>
-                        <input type="checkbox" name="reminders[]" value="15" <?php echo esc_attr($checked1); ?>>
+                        <input type="checkbox" name="reminders[15]" value="15" <?php echo esc_attr($checked1); ?>>
                         Send a remider 15 minutes before the start
                     </label>
                     <br>
                     <label>
-                        <input type="checkbox" name="reminders[]" value="1440" <?php echo esc_attr($checked2); ?>>
+                        <input type="checkbox" name="reminders[1440]" value="1440" <?php echo esc_attr($checked2); ?>>
                         Send a remider 1 day before the start
                     </label>
                     <br>
