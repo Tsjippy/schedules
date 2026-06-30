@@ -48,6 +48,10 @@ register_activation_hook(__FILE__, function () {
     $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '[tsjippy_schedules]');
 
     update_option('tsjippy_schedules_settings', $settings);
+
+    if(function_exists('TSJIPPY\activate')){
+        \TSJIPPY\activate();
+    }
 });
 
 register_deactivation_hook(__FILE__, function () {
