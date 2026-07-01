@@ -273,7 +273,7 @@ class Schedules
         <div class='schedules-div table-wrapper' data-schedule-id="<?php echo esc_attr($this->currentSchedule->id); ?>" data-target="<?php echo esc_attr($this->currentSchedule->name); ?>" data-slotsize="<?php echo esc_attr($this->timeSlotSize); ?>" data-fixedslotsize="<?php echo esc_attr($this->fixedTimeSlotSize); ?>" data-hide_names="<?php echo esc_attr($this->hideNames); ?>" data-subject="<?php echo esc_attr($this->defaultSubject); ?>">
             <div class="modal publish-schedule hidden">
                 <div class="modal-content">
-                    <?php TSJIPPY\addCloseButtton();?>
+                    <?php TSJIPPY\addCloseButtton(); ?>
                     <form action="" method="post" id="publish-schedule_form">
                         <input type='hidden' class='no-reset' name='schedule-id'>
                         <p>
@@ -411,7 +411,7 @@ class Schedules
     ?>
         <div class="add-host-mobile-wrapper modal hidden">
             <div class="modal-content">
-                <?php TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton(); ?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id' value='<?php echo esc_attr($this->currentSchedule->id); ?>'>
 
@@ -527,7 +527,7 @@ class Schedules
         $date        = $this->currentSchedule->start_date;
         while (true) {
             // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
- echo $this->getMobileDay($date) . '<br>';
+            echo $this->getMobileDay($date) . '<br>';
 
             if ($date == $this->currentSchedule->end_date) {
                 break;
@@ -600,7 +600,7 @@ class Schedules
         }
 
         $results    = TSJIPPY\getFromDb(
-            "get_sessions_of_schedule_".$this->currentSchedule->id,
+            "get_sessions_of_schedule_" . $this->currentSchedule->id,
             "schedules",
             "SELECT * FROM %i WHERE `schedule_id`=%d",
             $this->sessionTableName,
@@ -1044,10 +1044,10 @@ class Schedules
                         } else {
                             //mealschedule
                             if ($mealScheduleRow) {
- echo wp_kses_post($this->writeMealCell($date, $startTime));
+                                echo wp_kses_post($this->writeMealCell($date, $startTime));
                                 //Orientation schedule
                             } else {
- echo wp_kses_post($this->writeOrientationCell($date, $startTime));
+                                echo wp_kses_post($this->writeOrientationCell($date, $startTime));
                             }
                         }
 
@@ -1229,7 +1229,7 @@ class Schedules
         <!-- Add host modal for admins -->
         <div name='add-host' class="modal hidden">
             <div class="modal-content">
-                <?php TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton(); ?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id'>
                     <input type='hidden' class='no-reset' name='session-id'>
@@ -1261,7 +1261,7 @@ class Schedules
         <!-- Add recipe modal -->
         <div name='recipe-keyword-modal' class="modal hidden">
             <div class="modal-content">
-                <?php TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton(); ?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id'>
                     <input type='hidden' class='no-reset' name='date'>
@@ -1327,7 +1327,7 @@ class Schedules
         <!-- Add session modal -->
         <div name='add-session' class="modal <?php echo esc_attr($hidden); ?>">
             <div class="modal-content">
-                <?php TSJIPPY\addCloseButtton();?>
+                <?php TSJIPPY\addCloseButtton(); ?>
                 <form action="" method="post">
                     <input type='hidden' class='no-reset' name='schedule-id' value='<?php echo esc_attr($schdeuleId); ?>'>
                     <input type='hidden' class='no-reset' name='session-id' value='<?php echo esc_attr($sessionId); ?>'>
@@ -1336,27 +1336,37 @@ class Schedules
                     <h3>Add a session</h3>
 
                     <label>
-                        <h4>Date:</h4>
+                        <h4>
+                            Date:
+                        </h4>
                         <input type='date' name='date' class='wide' value='<?php echo esc_attr($date); ?>' required>
                     </label>
 
                     <label>
-                        <h4>Select a start time:</h4>
+                        <h4>
+                            Select a start time:
+                        </h4>
                         <input type="time" name="start_time" class="time wide" value='<?php echo esc_attr($startTime); ?>' step="900" min="08:00" max="18:00" required>
                     </label>
 
                     <label>
-                        <h4>Select an end time:</h4>
+                        <h4>
+                            Select an end time:
+                        </h4>
                         <input type="time" name="end_time" class="time wide" value='<?php echo esc_attr($endTime); ?>' step="900" min="08:00" max="18:00" required>
                     </label>
 
                     <label>
-                        <h4>Subject</h4>
+                        <h4>
+                            Subject
+                        </h4>
                         <input type="text" name="subject" class="wide" value='<?php echo esc_attr($subject); ?>' required>
                     </label>
 
                     <label>
-                        <h4>Location</h4>
+                        <h4>
+                            Location
+                        </h4>
                         <input type="text" name="location" class="wide" value='<?php echo esc_attr($location); ?>'>
                     </label>
 
@@ -1365,7 +1375,9 @@ class Schedules
                     if ($this->admin) {
                     ?>
                         <label>
-                            <h4>Who is in charge</h4>
+                            <h4>
+                                Who is in charge
+                            </h4>
                             <?php
                             TSJIPPY\userSelect(onlyAdults: true, class: 'wide', id: 'host', userId: $host, type: 'list', listId: 'admin_host', echo: true);
                             ?>
@@ -1375,13 +1387,17 @@ class Schedules
                     ?>
 
                     <label>
-                        <h4>Other people involved</h4>
+                        <h4>
+                            Other people involved
+                        </h4>
                     </label>
                     <?php
                     TSJIPPY\userSelect(onlyAdults: true, class: 'wide', id: 'others', userId: $others, type: 'list', listId: 'admin_host', multiple: true, echo: true);
                     ?>
 
-                    <h4>Warnings</h4>
+                    <h4>
+                        Warnings
+                    </h4>
                     <label>
                         <input type="checkbox" name="reminders[15]" value="15" <?php echo esc_attr($checked1); ?>>
                         Send a remider 15 minutes before the start
@@ -1406,9 +1422,9 @@ class Schedules
             <!-- Edit schedule modal -->
             <div id='edit-schedule_modal' class="modal hidden">
                 <div class="modal-content">
-                    <?php TSJIPPY\addCloseButtton();?>
+                    <?php TSJIPPY\addCloseButtton(); ?>
                     <?php
- echo wp_kses_post($this->addScheduleForm(true));
+                    echo wp_kses_post($this->addScheduleForm(true));
                     ?>
                 </div>
             </div>
@@ -1445,7 +1461,9 @@ class Schedules
             <input type="hidden" class="no-reset" name="update" value="<?php echo esc_attr($update); ?>">
 
             <label>
-                <h4>Name of the person the schedule is for</h4>
+                <h4>
+                    Name of the person the schedule is for
+                </h4>
                 <input type='text' name='target-name' class='wide' list="website-users" required>
             </label>
 
@@ -1460,27 +1478,37 @@ class Schedules
             </datalist>
 
             <label>
-                <h4>Extra info or subtitle for this schedule</h4>
+                <h4>
+                    Extra info or subtitle for this schedule
+                </h4>
                 <input type='text' class='wide' name='schedule-info'>
             </label>
 
             <label>
-                <h4>Date the schedule should start</h4>
+                <h4>
+                    Date the schedule should start
+                </h4>
                 <input type='date' class='wide' name='start_date' required>
             </label>
 
             <label>
-                <h4>Date the schedule should end</h4>
+                <h4>
+                    Date the schedule should end
+                </h4>
                 <input type='date' class='wide' name='end_date' required>
             </label>
 
             <label>
-                <h4>Timeslot size (minutes)</h4>
+                <h4>
+                    Timeslot size (minutes)
+                </h4>
                 <input type='number' name='timeslotsize' value='15'>
             </label>
 
             <label>
-                <h4>Fixed timeslot size</h4>
+                <h4>
+                    Fixed timeslot size
+                </h4>
                 <label>
                     <input type='radio' name='fixedtimeslotsize' value='yes'>
                     Yes
@@ -1492,7 +1520,9 @@ class Schedules
             </label>
 
             <label>
-                <h4>Static session name</h4>
+                <h4>
+                    Static session name
+                </h4>
                 <input type='text' name='subject' value=''>
             </label>
 
@@ -1502,14 +1532,18 @@ class Schedules
             <button type='button' class="button small" onClick='event.target.closest("form").querySelector(".advanced-wrapper").classList.toggle("hidden")'>Advanced Options</button>
             <div class="advanced-wrapper hidden">
                 <label>
-                    <h4>Privacy</h4>
+                    <h4>
+                        Privacy
+                    </h4>
                     <label>
                         <input type='checkbox' name='hide_names'>
                         Hide names in the schedule
                     </label>
                 </label>
                 <br>
-                <h4>Other options</h4>
+                <h4>
+                    Other options
+                </h4>
                 <br>
                 <label class='option-label'>
                     <input type='checkbox' name='skiplunch' style="display: inline;width: auto;">
@@ -1527,7 +1561,9 @@ class Schedules
                 </label>
                 <br>
                 <br>
-                <h4>Roles with admin permissions:</h4>
+                <h4>
+                    Roles with admin permissions:
+                </h4>
                 <select name='admin-roles[]' multiple>
                     <option value=''>---</option>
 
@@ -1543,7 +1579,9 @@ class Schedules
                 </select>
                 <br>
                 <label>
-                    <h4>Roles with with full view permissions</h4>
+                    <h4>
+                        Roles with with full view permissions
+                    </h4>
 
                     <small><i>Roles without full view permission can only see the meal rows if they are not in the schedule</i></small><br>
                     <select name='view-roles[]' multiple>
@@ -1564,14 +1602,14 @@ class Schedules
             </div>
 
             <?php
-                $action = 'Add';
-                if ($update) {
-                    $action = 'Update';
-                }
-                TSJIPPY\addSaveButton('add_schedule', "$action schedule");
-                ?>
+            $action = 'Add';
+            if ($update) {
+                $action = 'Update';
+            }
+            TSJIPPY\addSaveButton('add_schedule', "$action schedule");
+            ?>
         </form>
-        <?php
+<?php
         return ob_get_clean();
     }
 }
