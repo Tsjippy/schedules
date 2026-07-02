@@ -2,16 +2,23 @@
 ## [Unreleased] - yyyy-mm-dd
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Updated
+
+## [1.0.8] - 2026-07-02
+
+
+### Added
 - attribute escaping
 - activate shared code function
 
 ### Changed
 - plugin tested up to 7.0
 - replaced in_array with isset
-
-### Fixed
-
-### Updated
 
 ## [1.0.7] - 2026-06-26
 
