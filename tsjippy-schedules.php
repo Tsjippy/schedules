@@ -44,10 +44,7 @@ register_activation_hook(__FILE__, function () {
         require_once(__DIR__  . '/shared-functionality/loader.php');
     }
 
-    $settings                    = SETTINGS;
-    $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '[tsjippy_schedules]');
-
-    update_option('tsjippy_schedules_settings', $settings);
+    createDefaultPages();
 
     if(function_exists('TSJIPPY\activate')){
         \TSJIPPY\activate();
@@ -55,8 +52,29 @@ register_activation_hook(__FILE__, function () {
 });
 
 register_deactivation_hook(__FILE__, function () {
-    foreach (SETTINGS['schedules-pages'] as $page) {
-        // Remove the auto created page
-        wp_delete_post($page, true);
-    }
+    // Remove the auto created page
+    wp_delete_post(SETTINGS['schedules-pages'] ?? -1, true);
 });
+
+/**
+ * Creates default pages if needed
+ * 
+ * @param string    $returnKey  The key to return a value for, default empty
+ */
+function createDefaultPages($returnKey=''){
+    /**
+     *  Default pages
+     */
+    $settings    = SETTINGS;
+
+    // Create frontend posting page
+    if(!isset($settings['schedules-page'])){
+        $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '[tsjippy_schedules]');
+    }
+
+    update_option('tsjippy_forms_settings', $settings);
+
+    if(!empty($returnKey) && isset($settings[$returnKey])){
+        return $settings[$returnKey];
+    }
+}
