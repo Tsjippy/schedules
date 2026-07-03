@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- add default pages when not present
 
 ### Fixed
 
 ### Updated
+
+## [1.1.0] - 2026-07-03
+
+
+### Changed
+- add default pages when not present
 
 ## [1.0.9] - 2026-07-02
 
