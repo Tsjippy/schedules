@@ -6,9 +6,13 @@ use TSJIPPY;
 
 add_action('init', function () {
     register_block_type(
-        __DIR__ . '/schedules/build',
+        'tsjippy-schedules/show-schedules',
         array(
+            'title'           => __( 'Schedules', 'tsjippy' ),
             'render_callback' => __NAMESPACE__ . '\displaySchedules',
+            'supports'        => array(
+                'autoRegister' => true,
+            ),
         )
     );
 });
