@@ -1,6 +1,6 @@
 <?php
 
-namespace TSJIPPY\EVENTS;
+namespace TSJIPPY\SCHEDULES;
 
 use TSJIPPY;
 use WP_Error;

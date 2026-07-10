@@ -1,12 +1,12 @@
 <?php
 
-namespace TSJIPPY\EVENTS;
+namespace TSJIPPY\SCHEDULES;
 
 use TSJIPPY;
 
 /**
  * Plugin Name:          Tsjippy Schedules
- * Description:          This plugin adds the possibility to create a schduled for one or more users.
+ * Description:          This plugin adds the possibility to create a schedule for one or more users.
  * Version:              1.1.1
  * Author:               Ewald Harmsen
  * AuthorURI:            harmseninnigeria.nl

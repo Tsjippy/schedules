@@ -1,6 +1,6 @@
 <?php
 
-namespace TSJIPPY\EVENTS;
+namespace TSJIPPY\SCHEDULES;
 
 use TSJIPPY;
 use WP_Error;
@@ -45,7 +45,7 @@ class Schedules
 
         $this->user              = wp_get_current_user();
 
-        $this->events            = new DisplayEvents();
+        $this->events            = new TSJIPPY\EVENTS\DisplayEvents();
 
         $this->lunchStartTime    = '12:00';
         $this->lunchEndTime      = '13:00';

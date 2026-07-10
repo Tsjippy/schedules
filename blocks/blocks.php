@@ -1,21 +1,26 @@
 <?php
 
-namespace TSJIPPY\EVENTS;
+namespace TSJIPPY\SCHEDULES;
 
 use TSJIPPY;
 
-add_action('init', function () {
+if ( ! defined( 'ABSPATH' ) ) exit;
+
+add_action('init', __NAMESPACE__ . '\initBlocks');
+function initBlocks()
+{
     register_block_type(
-        'tsjippy-schedules/show_schedules',
+        'tsjippy-schedules/show-schedules',
         array(
             'title'            => __( 'Schedules', 'tsjippy' ),
             'render_callback'  => __NAMESPACE__ . '\displaySchedules',
             'supports'         => array(
                 'autoRegister' => true,
             ),
-        )
+            'icon'  => 'schedule'
+        ),
     );
-});
+}
 
 function displaySchedules()
 {
