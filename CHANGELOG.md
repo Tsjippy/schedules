@@ -4,13 +4,18 @@
 ### Added
 
 ### Changed
-- php only schedules block
-- removed shortcode
-- namespace
 
 ### Fixed
 
 ### Updated
+
+## [1.1.2] - 2026-07-10
+
+
+### Changed
+- php only schedules block
+- removed shortcode
+- namespace
 
 ## [1.1.1] - 2026-07-06
 
