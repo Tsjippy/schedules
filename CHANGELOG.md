@@ -7,6 +7,7 @@
 - default page content
 
 ### Fixed
+- saving forms settings
 
 ### Updated
 
