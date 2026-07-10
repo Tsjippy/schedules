@@ -6,11 +6,11 @@ use TSJIPPY;
 
 add_action('init', function () {
     register_block_type(
-        'tsjippy-schedules/show-schedules',
+        'tsjippy-schedules/show_schedules',
         array(
-            'title'           => __( 'Schedules', 'tsjippy' ),
-            'render_callback' => __NAMESPACE__ . '\displaySchedules',
-            'supports'        => array(
+            'title'            => __( 'Schedules', 'tsjippy' ),
+            'render_callback'  => __NAMESPACE__ . '\displaySchedules',
+            'supports'         => array(
                 'autoRegister' => true,
             ),
         )
