@@ -5,6 +5,7 @@
 
 ### Changed
 - php only schedules block
+- removed shortcode
 
 ### Fixed
 
