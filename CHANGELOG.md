@@ -6,6 +6,7 @@
 ### Changed
 - php only schedules block
 - removed shortcode
+- namespace
 
 ### Fixed
 
