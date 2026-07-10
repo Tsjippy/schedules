@@ -69,7 +69,7 @@ function createDefaultPages($returnKey=''){
 
     // Create frontend posting page
     if(!isset($settings['schedules-page'])){
-        $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '[tsjippy_schedules]');
+        $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '<!-- wp:tsjippy-schedules/show /-->');
     }
 
     update_option('tsjippy_forms_settings', $settings);
