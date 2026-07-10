@@ -72,7 +72,7 @@ function createDefaultPages($returnKey=''){
         $settings['schedules-page']    = TSJIPPY\ADMIN\createDefaultPage('Schedules', '<!-- wp:tsjippy-schedules/show /-->');
     }
 
-    update_option('tsjippy_forms_settings', $settings);
+    update_option('tsjippy_schedules_settings', $settings);
 
     if(!empty($returnKey) && isset($settings[$returnKey])){
         return $settings[$returnKey];
