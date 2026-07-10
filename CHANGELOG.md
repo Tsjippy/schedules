@@ -4,12 +4,19 @@
 ### Added
 
 ### Changed
+
+### Fixed
+
+### Updated
+
+## [1.1.4] - 2026-07-10
+
+
+### Changed
 - default page content
 
 ### Fixed
 - saving forms settings
-
-### Updated
 
 ## [1.1.3] - 2026-07-10
 
