@@ -7,7 +7,7 @@ use TSJIPPY;
 /**
  * Plugin Name:          Tsjippy Schedules
  * Description:          This plugin adds the possibility to create a schedule for one or more users.
- * Version:              1.1.2
+ * Version:              1.1.3
  * Author:               Ewald Harmsen
  * AuthorURI:            harmseninnigeria.nl
  * Requires at least:    6.3
