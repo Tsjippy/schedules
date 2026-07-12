@@ -12,7 +12,7 @@ function initBlocks()
     register_block_type(
         'tsjippy-schedules/show-schedules',
         array(
-            'title'            => __( 'Schedules', 'tsjippy' ),
+            'title'            => __( 'Schedules', '%TEXTDOMAIN%' ),
             'render_callback'  => __NAMESPACE__ . '\displaySchedules',
             'supports'         => array(
                 'autoRegister' => true,
