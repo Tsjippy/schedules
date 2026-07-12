@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- uses %TEXTDOMAIN% as placeholder for translation domain
 
 ### Fixed
 
 ### Updated
+
+## [1.1.7] - 2026-07-12
+
+
+### Changed
+- uses %TEXTDOMAIN% as placeholder for translation domain
 
 ## [1.1.6] - 2026-07-11
 
