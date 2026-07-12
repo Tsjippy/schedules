@@ -228,7 +228,7 @@ class CreateSchedule extends Schedules
             update_post_meta($postId, 'tsjippy_reminders', $settings['reminders']);
 
             // setting the eventdetails meta value also creates the event. Remove it
-            $events = new CreateEvents();
+            $events = new TSJIPPY\EVENTS\CreateEvents();
             $events->removeDbRows($postId);
 
             foreach ($a['only_for'] as $userId) {
