@@ -9,6 +9,12 @@ if (! defined('ABSPATH')) {
 }
 
 add_action('wp_after_insert_post', __NAMESPACE__ . '\afterInsertPost', 10, 2);
+/**
+ * Set the default picture of a post after it is inserted
+ *
+ * @param    int        $postId        The WP_Post id
+ * @param    \WP_Post    $post        The WP_Post object
+ */
 function afterInsertPost($postId, $post)
 {
     if (has_shortcode($post->post_content, 'schedules')) {
