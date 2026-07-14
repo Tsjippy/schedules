@@ -252,17 +252,17 @@ class Schedules
             $args = array(
                 'meta_query' => array(
                     array(
-                        'key'        => 'last_name',
-                        'value'        => str_replace(' family', '', $this->currentSchedule->name),
-                        'compare'    => 'LIKE'
+                        'key'     => 'last_name',
+                        'value'   => str_replace(' family', '', $this->currentSchedule->name),
+                        'compare' => 'LIKE'
                     )
                 )
             );
             //Full name
         } else {
             $args = array(
-                'search'            => $this->currentSchedule->name,
-                'search_columns'     => ['display_name'],
+                'search'          => $this->currentSchedule->name,
+                'search_columns'  => ['display_name'],
             );
         }
 
