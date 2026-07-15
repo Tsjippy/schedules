@@ -170,8 +170,8 @@ class CreateSchedule extends Schedules
             $this->sessionTableName,
             [
                 'schedule_id' => $this->scheduleId,
-                'post_ids'    => serialize($postIds),
-                'event_ids'   => serialize($eventIds),
+                'post_ids'    => $postIds,
+                'event_ids'   => $eventIds,
                 'meal'        => $title == 'lunch' || $title == 'dinner'
             ],
             [
