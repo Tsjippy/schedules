@@ -350,7 +350,7 @@ class CreateSchedule extends Schedules
              * Flush db cache
              */
             if(wp_cache_supports( 'flush_group' )){
-                wp_cache_flush_group('schedules');
+                wp_cache_flush_group('tsjippy_schedules');
             }else{
                 wp_cache_flush();
             }
