@@ -1,3 +1,7 @@
+import{
+  fetchRestApi
+} from "../../../tsjippy-forms/js/form_submit_functions.js";
+
 //shows the modal to select a user as host
 export function showAddHostModal(target, date = "", startTime = "") {
   target.classList.add("active");
@@ -36,7 +40,7 @@ export async function addCurrentUserAsHost(target, dateStr) {
       Main.showLoader(target.querySelector("span"));
     }
 
-    let response = await FormSubmit.fetchRestApi("events/add_host", formData);
+    let response = await fetchRestApi("events/add_host", formData);
 
     if (response) {
       addHostHtml(response);
@@ -79,7 +83,7 @@ export async function removeHost(target, dateStr) {
     formData.append("session-id", target.dataset.sessionId);
     Main.showLoader(target.firstChild);
 
-    var response = await FormSubmit.fetchRestApi(
+    var response = await fetchRestApi(
       "events/remove_host",
       formData,
     );

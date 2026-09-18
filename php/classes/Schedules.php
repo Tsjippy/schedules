@@ -203,7 +203,7 @@ class Schedules
     public function showschedules()
     {
         wp_enqueue_style('tsjippy_schedules_css');
-        wp_enqueue_script('tsjippy_schedules_script');
+        wp_enqueue_script_module('@tsjippy/schedules_script');
 
         $schedules    = '';
         $form        = $this->addScheduleForm();

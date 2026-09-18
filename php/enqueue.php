@@ -54,9 +54,9 @@ function loadAssets()
 
     //js
     if (wp_is_mobile()) {
-        wp_register_script('tsjippy_schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile-schedule.min.js'), array('tsjippy_formsubmit_script'), PLUGINVERSION, true);
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile-schedule.min.js'), array('@tsjippy/formsubmit_script'), PLUGINVERSION);
     } else {
-        wp_register_script('tsjippy_schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule.min.js'), array('tsjippy_table_script', 'selectable', 'tsjippy_formsubmit_script'), PLUGINVERSION, true);
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule.min.js'), array('@tsjippy/table_script', 'selectable', '@tsjippy/formsubmit_script'), PLUGINVERSION);
     }
 
     $schedulePages         = SETTINGS['schedule-pages'] ?? [];
@@ -64,7 +64,7 @@ function loadAssets()
         if (in_array(get_the_ID(), $schedulePages)) {
             wp_enqueue_style('tsjippy_schedules_css');
 
-            wp_enqueue_script('tsjippy_schedules_script');
+            wp_enqueue_script_module('@tsjippy/schedules_script');
         } 
     }
 }

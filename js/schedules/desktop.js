@@ -9,6 +9,13 @@ import {
   editTimeSlot,
 } from "./shared.js";
 
+import{
+  submitForm,
+  formReset,
+  fetchRestApi
+} from "../../../tsjippy-forms/js/form_submit_functions.js";
+
+
 console.log("Desktop-schedule.js loaded");
 
 /**
@@ -22,7 +29,7 @@ console.log("Desktop-schedule.js loaded");
  * @return nothing
  */
 async function addSchedule(target) {
-  var response = await FormSubmit.submitForm(target, "events/add_schedule");
+  var response = await submitForm(target, "events/add_schedule");
 
   Main.hideModals();
 
@@ -52,7 +59,7 @@ function ShowPublishScheduleModal(target) {
 }
 
 async function publishSchedule(target) {
-  var response = await FormSubmit.submitForm(target, "events/publish_schedule");
+  var response = await submitForm(target, "events/publish_schedule");
 
   if (response) {
     document
@@ -81,7 +88,7 @@ async function removeSchedule(target) {
     target.closest(".schedules-div"),
   );
   if (confirmed) {
-    let response = await FormSubmit.fetchRestApi(
+    let response = await fetchRestApi(
       "events/remove_schedule",
       formData,
     );
@@ -125,7 +132,7 @@ async function addHost(target) {
 
   Main.showLoader(cell.firstChild);
 
-  var response = await FormSubmit.submitForm(target, "events/add_host");
+  var response = await submitForm(target, "events/add_host");
 
   if (response) {
     table = cell.closest("table");
@@ -189,7 +196,7 @@ function showRecipeModal(target) {
   //Fill the modal with the values of the clickes schedule
   var recipeModal = document.querySelector('[name="recipe-keyword-modal"]');
 
-  FormSubmit.formReset(recipeModal.querySelector("form"));
+  formReset(recipeModal.querySelector("form"));
 
   recipeModal.querySelector('[name="schedule-id"]').value = table.dataset["id"];
   recipeModal.querySelector('[name="date"]').value = date;
@@ -207,7 +214,7 @@ function showRecipeModal(target) {
 
 //submit the recipe form
 async function submitRecipe(target) {
-  var response = await FormSubmit.submitForm(target, "events/add_menu");
+  var response = await submitForm(target, "events/add_menu");
 
   document.querySelector(".active").textContent = target
     .closest("form")

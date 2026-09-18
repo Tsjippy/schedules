@@ -6,11 +6,16 @@ import {
   showTimeslotModal,
 } from "./shared.js";
 
+import{
+  submitForm
+} from "../../../tsjippy-forms/js/form_submit_functions.js";
+
+
 console.log("Mobile-schedule.js loaded");
 
 // Add a new host/ updates an existing entry when the host form is submitted
 async function addHost(target, multiple = false) {
-  var response = await FormSubmit.submitForm(target, "events/add_host");
+  var response = await submitForm(target, "events/add_host");
 
   if (response) {
     if (multiple) {
