@@ -300,6 +300,12 @@ export async function editTimeSlot(target, date) {
 }
 
 function loadHostFormdata(target) {
+  const data   = JSON.parse(
+    document.getElementById(
+        'wp-script-module-data-@tsjippy/statistics_script'
+    ).textContent
+  );
+
   let scheduleId = target.closest(".schedules-div").dataset.id;
   let table = target.closest("table");
 
@@ -322,7 +328,7 @@ function loadHostFormdata(target) {
   if (host != null) {
     formData.append("host-id", host);
   } else {
-    formData.append("host-id", tsjippy.userId);
+    formData.append("host-id", data.userId);
   }
 
   formData.append("starttime", startTime);

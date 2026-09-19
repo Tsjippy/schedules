@@ -59,6 +59,12 @@ function loadAssets()
         wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule.min.js'), array('@tsjippy/table_script', 'selectable', '@tsjippy/formsubmit_script'), PLUGINVERSION);
     }
 
+    add_filter( 'script_module_data_@tsjippy/schedules_script', function($data){
+        $data['userId']       = get_current_user_id();
+
+        return $data; 
+    } );
+
     $schedulePages         = SETTINGS['schedule-pages'] ?? [];
     if (is_numeric(get_the_ID())) {
         if (in_array(get_the_ID(), $schedulePages)) {
