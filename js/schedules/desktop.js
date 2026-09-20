@@ -15,6 +15,26 @@ import{
   fetchRestApi
 } from "../../../tsjippy-forms/js/form_submit_functions.js";
 
+import { 
+  displayMessage 
+} from "../../../tsjippy-shared-functionality/js/partials/display_message.js";
+
+import { 
+  showLoader 
+} from "../../../tsjippy-shared-functionality/js/partials/show_loader.js";
+
+import { 
+  showModal,
+  hideModals
+} from "../../../tsjippy-shared-functionality/js/partials/modals.js";
+
+import { 
+  Alert 
+} from "../../../tsjippy-shared-functionality/js/partials/alert.js";
+
+import { 
+  isMobileDevice 
+} from "../../../tsjippy-shared-functionality/js/partials/mobile.js";
 
 console.log("Desktop-schedule.js loaded");
 
@@ -31,12 +51,12 @@ console.log("Desktop-schedule.js loaded");
 async function addSchedule(target) {
   var response = await submitForm(target, "events/add_schedule");
 
-  Main.hideModals();
+  hideModals();
 
   if (response) {
     target.closest(".schedules-wrapper").outerHTML = response.html;
 
-    Main.displayMessage(response.message);
+    displayMessage(response.message);
 
     addSelectable();
   }
@@ -52,9 +72,9 @@ function ShowPublishScheduleModal(target) {
     modal.querySelector('[name="schedule-target"]').value =
       target.dataset.target;
     modal.querySelector('[name="publish-schedule"]').click();
-    Main.showLoader(target, true);
+    showLoader(target, true);
   } else {
-    Main.showModal(modal);
+    showModal(modal);
   }
 }
 
@@ -66,9 +86,9 @@ async function publishSchedule(target) {
       .querySelectorAll(".schedule-actions .loader-wrapper")
       .forEach((el) => el.classList.add("hidden"));
 
-    Main.hideModals();
+    hideModals();
 
-    Main.displayMessage(response);
+    displayMessage(response);
 
     document
       .querySelectorAll(".schedule.publish.warning")
@@ -94,7 +114,7 @@ async function removeSchedule(target) {
     );
 
     if (response) {
-      Main.displayMessage(response);
+      displayMessage(response);
 
       document
         .querySelector(".schedules-wrapper .loader-wrapper:not(.hidden)")
@@ -130,7 +150,7 @@ async function addHost(target) {
     return;
   }
 
-  Main.showLoader(cell.firstChild);
+  showLoader(cell.firstChild);
 
   var response = await submitForm(target, "events/add_host");
 
@@ -209,7 +229,7 @@ function showRecipeModal(target) {
       "Update recipe keywords";
   }
 
-  Main.showModal(recipeModal);
+  showModal(recipeModal);
 }
 
 //submit the recipe form
@@ -222,9 +242,9 @@ async function submitRecipe(target) {
 
   document.querySelector(".active").classList.remove("active");
 
-  Main.hideModals();
+  hideModals();
 
-  Main.displayMessage(response);
+  displayMessage(response);
 }
 
 function showEditScheduleModal(target) {
@@ -280,7 +300,7 @@ function showEditScheduleModal(target) {
     .querySelectorAll(`[name="view-roles[]"]`)
     .forEach((select) => select.dispatchEvent(new Event("change")));
 
-  Main.showModal(modal);
+  showModal(modal);
 }
 
 async function checkIfValidSelection(target, selected, e) {
@@ -304,7 +324,7 @@ async function checkIfValidSelection(target, selected, e) {
             title: "Error",
           };
 
-          new Main.Alert(
+          new Alert(
             `You can not select times on multiple days!`,
             "error",
             options,
@@ -341,7 +361,7 @@ async function checkIfValidSelection(target, selected, e) {
 
       // Only show loader when the cell is empty
       if (!firstCell.matches(".selected")) {
-        Main.showLoader(firstCell.firstChild);
+        showLoader(firstCell.firstChild);
       }
 
       firstCell.classList.add("active");
@@ -440,7 +460,7 @@ function addSelectable() {
     .querySelectorAll(".tsjippy.table.schedule")
     .forEach(function (table) {
       //Add selectable on non-mobile devices
-      if (!Main.isMobileDevice() || table.rows.length < 7) {
+      if (!isMobileDevice() || table.rows.length < 7) {
         if (table._selectable != undefined) {
           table._selectable.destroy();
         }

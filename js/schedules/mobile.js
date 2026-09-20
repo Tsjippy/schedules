@@ -11,6 +11,15 @@ import{
 } from "../../../tsjippy-forms/js/form_submit_functions.js";
 
 
+import { 
+  displayMessage 
+} from "../../../tsjippy-shared-functionality/js/partials/display_message.js";
+
+import { 
+  showModal,
+  hideModals
+} from "../../../tsjippy-shared-functionality/js/partials/modals.js";
+
 console.log("Mobile-schedule.js loaded");
 
 // Add a new host/ updates an existing entry when the host form is submitted
@@ -24,17 +33,17 @@ async function addHost(target, multiple = false) {
         el.outerHTML = response.html[el.dataset.isodate];
       });
 
-      Main.displayMessage(response.message);
+      displayMessage(response.message);
 
-      Main.hideModals();
+      hideModals();
     } else {
       addHostHtml(response);
     }
 
-    Main.displayMessage(response.message);
+    displayMessage(response.message);
   }
 
-  Main.hideModals();
+  hideModals();
 }
 
 document.addEventListener("click", async function (event) {
@@ -96,7 +105,7 @@ document.addEventListener("click", async function (event) {
   } else if (target.name == "add-host") {
     event.stopPropagation();
 
-    Main.showModal(
+    showModal(
       target
         .closest(".schedules-div")
         .querySelector(".add-host-mobile-wrapper"),

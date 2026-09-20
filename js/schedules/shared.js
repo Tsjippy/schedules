@@ -2,6 +2,24 @@ import{
   fetchRestApi
 } from "../../../tsjippy-forms/js/form_submit_functions.js";
 
+import { 
+  showLoader 
+} from "../../../tsjippy-shared-functionality/js/partials/show_loader.js";
+
+import { 
+  displayMessage 
+} from "../../../tsjippy-shared-functionality/js/partials/display_message.js";
+
+import { 
+  showModal,
+  hideModals
+} from "../../../tsjippy-shared-functionality/js/partials/modals.js";
+
+
+import { 
+  Alert 
+} from "../../../tsjippy-shared-functionality/js/partials/alert.js";
+
 //shows the modal to select a user as host
 export function showAddHostModal(target, date = "", startTime = "") {
   target.classList.add("active");
@@ -34,10 +52,10 @@ export async function addCurrentUserAsHost(target, dateStr) {
     let formData = loadHostFormdata(target);
 
     if (target.closest("table") == null) {
-      Main.showLoader(target);
+      showLoader(target);
     } else {
       target.innerHTML = "<span></span>";
-      Main.showLoader(target.querySelector("span"));
+      showLoader(target.querySelector("span"));
     }
 
     let response = await fetchRestApi("events/add_host", formData);
@@ -57,9 +75,9 @@ export function addHostHtml(response) {
     target.outerHTML = response.html;
   }
 
-  Main.displayMessage(response.message);
+  displayMessage(response.message);
 
-  Main.hideModals();
+  hideModals();
 }
 
 // Remove a host
@@ -81,14 +99,14 @@ export async function removeHost(target, dateStr) {
   if (confirmed) {
     let formData = new FormData();
     formData.append("session-id", target.dataset.sessionId);
-    Main.showLoader(target.firstChild);
+    showLoader(target.firstChild);
 
     var response = await fetchRestApi(
       "events/remove_host",
       formData,
     );
 
-    Main.displayMessage(response.message);
+    displayMessage(response.message);
 
     return response.html;
   }
@@ -140,7 +158,7 @@ export function showTimeslotModal(selected = "") {
 
     // Only show loader when the cell is empty
     if (!firstCell.matches(".selected")) {
-      Main.showLoader(firstCell.firstChild);
+      showLoader(firstCell.firstChild);
     }
   }
   modal.querySelector('[name="schedule-id"]').value =
@@ -262,7 +280,7 @@ export function showTimeslotModal(selected = "") {
     });
   }
 
-  Main.showModal(modal);
+  showModal(modal);
 }
 
 export async function editTimeSlot(target, date) {
@@ -272,7 +290,7 @@ export async function editTimeSlot(target, date) {
     CustomButtonText: "Remove timeslot",
   };
 
-  let alerter = new Main.Alert(
+  let alerter = new Alert(
     `Do you want to edit or remove this timeslot?`,
     "question",
     options,
@@ -349,7 +367,7 @@ export async function checkConfirmation(text, target) {
     CancelButtonText: "Cancel",
   };
 
-  let alerter = new Main.Alert(text + "?", "warning", options);
+  let alerter = new Alert(text + "?", "warning", options);
   let response = await alerter.promise;
 
   if (response == "confirm") {
@@ -357,7 +375,7 @@ export async function checkConfirmation(text, target) {
       .querySelectorAll(".modal:not(.hidden)")
       .forEach((modal) => modal.classList.add("hidden"));
     //display loading gif
-    Main.showLoader(target.firstChild);
+    showLoader(target.firstChild);
 
     return true;
   }
