@@ -54,9 +54,9 @@ function loadAssets()
 
     //js
     if (wp_is_mobile()) {
-        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile-schedule.min.js'), array('@tsjippy/formsubmit_script'), PLUGINVERSION);
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile-schedule' . TSJIPPY\JSEXTENSION), array('@tsjippy/formsubmit_script'), PLUGINVERSION);
     } else {
-        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule.min.js'), array('@tsjippy/table_script', 'selectable', '@tsjippy/formsubmit_script'), PLUGINVERSION);
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule' . TSJIPPY\JSEXTENSION), array('@tsjippy/table_script', 'selectable', '@tsjippy/formsubmit_script'), PLUGINVERSION);
     }
 
     add_filter( 'script_module_data_@tsjippy/schedules_script', function($data){
