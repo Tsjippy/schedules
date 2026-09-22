@@ -4,11 +4,16 @@
 ### Added
 
 ### Changed
-- js refactor
 
 ### Fixed
 
 ### Updated
+
+## [1.4.1] - 2026-09-22
+
+
+### Changed
+- js refactor
 
 ## [1.4.0] - 2026-09-20
 
