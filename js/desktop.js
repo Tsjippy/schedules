@@ -7,34 +7,34 @@ import {
   showTimeslotModal,
   checkConfirmation,
   editTimeSlot,
-} from "./shared.js";
+} from "@tsjippy/schedules_shared";
 
 import{
   submitForm,
   formReset,
   fetchRestApi
-} from "../../../tsjippy-forms/js/form_submit_functions.js";
+} from "@tsjippy/form_submit_functions";
 
 import { 
   displayMessage 
-} from "../../../tsjippy-shared-functionality/js/partials/display_message.js";
+} from "@tsjippy/display_message";
 
 import { 
   showLoader 
-} from "../../../tsjippy-shared-functionality/js/partials/show_loader.js";
+} from "@tsjippy/show_loader";
 
 import { 
   showModal,
   hideModals
-} from "../../../tsjippy-shared-functionality/js/partials/modals.js";
+} from "@tsjippy/modals";
 
 import { 
   Alert 
-} from "../../../tsjippy-shared-functionality/js/partials/alert.js";
+} from "@tsjippy/alert";
 
 import { 
   isMobileDevice 
-} from "../../../tsjippy-shared-functionality/js/partials/mobile.js";
+} from "@tsjippy/mobile";
 
 console.log("Desktop-schedule.js loaded");
 

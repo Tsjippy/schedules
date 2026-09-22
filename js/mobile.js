@@ -4,21 +4,21 @@ import {
   editTimeSlot,
   addHostHtml,
   showTimeslotModal,
-} from "./shared.js";
+} from "@tsjippy/schedules_shared";
 
 import{
   submitForm
-} from "../../../tsjippy-forms/js/form_submit_functions.js";
+} from "@tsjippy/form_submit_functions";
 
 
 import { 
   displayMessage 
-} from "../../../tsjippy-shared-functionality/js/partials/display_message.js";
+} from "@tsjippy/display_message";
 
 import { 
   showModal,
   hideModals
-} from "../../../tsjippy-shared-functionality/js/partials/modals.js";
+} from "@tsjippy/modals";
 
 console.log("Mobile-schedule.js loaded");
 

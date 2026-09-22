@@ -49,14 +49,52 @@ function loadAssets()
         return;
     }
 
-    //css
+    /**
+     * CSS
+     */
     wp_register_style('tsjippy_schedules_css', TSJIPPY\pathToUrl(PLUGINPATH . 'css/schedules.min.css'), array(), PLUGINVERSION);
 
-    //js
+    /**
+     * Modules
+     */
+
+    $deps   = SCRIPT_DEBUG ? [  
+        '@tsjippy/form_submit_functions',
+        "@tsjippy/show_loader", 
+        "@tsjippy/display_message", 
+        "@tsjippy/modals",
+        "@tsjippy/alert"
+    ] :
+    [];
+    wp_register_script_module('@tsjippy/schedules_shared', TSJIPPY\pathToUrl(PLUGINPATH . 'js/modules/shared.js'), $deps, PLUGINVERSION);
+
+    /**
+     * Scripts
+     */
     if (wp_is_mobile()) {
-        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile-schedule' . TSJIPPY\JSEXTENSION), array('@tsjippy/formsubmit_script'), PLUGINVERSION);
+        $deps   = SCRIPT_DEBUG ? [  
+            '@tsjippy/schedules-shared', 
+            "@tsjippy/form_submit_functions", 
+            "@tsjippy/display_message", 
+            "@tsjippy/modals"
+        ] :
+        [];
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile' . TSJIPPY\JSEXTENSION), $deps, PLUGINVERSION);
     } else {
-        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop-schedule' . TSJIPPY\JSEXTENSION), array('@tsjippy/table_script', 'selectable', '@tsjippy/formsubmit_script'), PLUGINVERSION);
+        $deps   = SCRIPT_DEBUG ? [  
+            '@tsjippy/schedules_shared', 
+            "@tsjippy/form_submit_functions", 
+            "@tsjippy/show_loader", 
+            "@tsjippy/display_message", 
+            "@tsjippy/modals",
+            "@tsjippy/alert",
+            "@tsjippy/mobile"
+        ] :
+        [];
+
+        $deps[] = '@tsjippy/table_script';
+        $deps[] = 'selectable';
+        wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop' . TSJIPPY\JSEXTENSION), $deps, PLUGINVERSION);
     }
 
     add_filter( 'script_module_data_@tsjippy/schedules_script', function($data){

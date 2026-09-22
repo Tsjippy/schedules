@@ -4,9 +4,9 @@
   "description": "Events",
   "main": "./events.js",
   "scripts": {
-    "mobile": "webpack --entry ./schedules/mobile.js --output-path . --output-filename mobile-schedule.min.js --progress --mode=production --devtool source-map",
-    "desktop": "webpack --entry ./schedules/desktop.js --output-path . --output-filename desktop-schedule.min.js --progress --mode=production --devtool source-map",
-    "all": "run-p  mobile desktop "
+    "build": "webpack --progress",
+    "watch": "webpack --watch --progress",
+    "all": "npm run build"
   },
   "author": "Ewald Harmsen",
   "license": "ISC",
