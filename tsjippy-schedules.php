@@ -7,13 +7,13 @@ use TSJIPPY;
 /**
  * Plugin Name:          Tsjippy Schedules
  * Description:          This plugin adds the possibility to create a schedule for one or more users.
- * Version:              1.4.2
+ * Version:              1.4.3
  * Author:               Ewald Harmsen
  * AuthorURI:            harmseninnigeria.nl
  * Requires at least:    6.3
  * Requires PHP:         8.3
  * Plugin URI:           https://github.com/Tsjippy/events/
- * Tested:               7.1.1
+ * Tested:               7.1.2
  * TextDomain:           tsjippy
  * Requires Plugins:     tsjippy-events
  * License: GPLv2 or later
