@@ -15,7 +15,6 @@ import {
   hideModals
 } from "@tsjippy/modals";
 
-
 import { 
   Alert 
 } from "@tsjippy/alert";
@@ -320,7 +319,7 @@ export async function editTimeSlot(target, date) {
 function loadHostFormdata(target) {
   const data   = JSON.parse(
     document.getElementById(
-        'wp-script-module-data-@tsjippy/statistics_script'
+        'wp-script-module-data-@tsjippy/nonce_script'
     ).textContent
   );
 

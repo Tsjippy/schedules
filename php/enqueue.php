@@ -30,6 +30,11 @@ function afterInsertPost($postId, $post)
 }
 
 add_action('wp_trash_post',  __NAMESPACE__ . '\trashPost');
+/**
+ * Runs when a post is trashed
+ * 
+ * @param int   $postId
+ */
 function trashPost($postId)
 {
     $pages  = SETTINGS['schedule-pages'] ?? [];
@@ -43,6 +48,9 @@ function trashPost($postId)
 }
 
 add_action('wp_enqueue_scripts', __NAMESPACE__ . '\loadAssets');
+/**
+ * Registeres the CSS and JS
+ */
 function loadAssets()
 {
     if (str_contains($_SERVER['REQUEST_URI'], '.map')) {
@@ -57,7 +65,6 @@ function loadAssets()
     /**
      * Modules
      */
-
     $deps   = SCRIPT_DEBUG ? [  
         '@tsjippy/form_submit_functions',
         "@tsjippy/show_loader", 
@@ -66,6 +73,8 @@ function loadAssets()
         "@tsjippy/alert"
     ] :
     [];
+
+    $deps[] = "@tsjippy/nonce_script";
     wp_register_script_module('@tsjippy/schedules_shared', TSJIPPY\pathToUrl(PLUGINPATH . 'js/modules/shared.js'), $deps, PLUGINVERSION);
 
     /**
@@ -79,6 +88,7 @@ function loadAssets()
             "@tsjippy/modals"
         ] :
         [];
+        $deps[] = "@tsjippy/nonce_script";
         wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/mobile' . TSJIPPY\JSEXTENSION), $deps, PLUGINVERSION);
     } else {
         $deps   = SCRIPT_DEBUG ? [  
@@ -94,14 +104,9 @@ function loadAssets()
 
         $deps[] = '@tsjippy/table_script';
         $deps[] = 'selectable';
+        $deps[] = "@tsjippy/nonce_script";
         wp_register_script_module('@tsjippy/schedules_script', TSJIPPY\pathToUrl(PLUGINPATH . 'js/desktop' . TSJIPPY\JSEXTENSION), $deps, PLUGINVERSION);
     }
-
-    add_filter( 'script_module_data_@tsjippy/schedules_script', function($data){
-        $data['userId']       = get_current_user_id();
-
-        return $data; 
-    } );
 
     $schedulePages         = SETTINGS['schedule-pages'] ?? [];
     if (is_numeric(get_the_ID())) {

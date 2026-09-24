@@ -615,5 +615,5 @@ document.addEventListener("change", function (event) {
     return;
   }
 
-  event.stopImmediatePropagation();
+  event.stopPropagation();
 });
