@@ -6,9 +6,14 @@
 ### Changed
 
 ### Fixed
-- sanitazion error
 
 ### Updated
+
+## [1.5.3] - 2026-11-26
+
+
+### Fixed
+- sanitazion error
 
 ## [1.5.1] - 2026-10-03
 
