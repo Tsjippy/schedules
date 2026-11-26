@@ -21,7 +21,7 @@ function schedulesRestApiInit()
                 $schedule        = new CreateSchedule();
 
                 // Recursively sanitize all text fields in the array
-                $settings = TSJIPPY\sanitize($_POST);
+                $settings = TSJIPPY\sanitize($_POST, 'wp_kses_post');
 
                 return $schedule->addSchedule($settings);
             },
@@ -166,7 +166,7 @@ function schedulesRestApiInit()
             'callback'                 => function () {
                 $schedule        = new CreateSchedule();
 
-                $settings = TSJIPPY\sanitize($_POST);
+                $settings = TSJIPPY\sanitize($_POST, 'wp_kses_post');
 
                 return $schedule->addMenu($settings);
             },
